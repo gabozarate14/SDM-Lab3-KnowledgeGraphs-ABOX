@@ -41,7 +41,6 @@ ns = Namespace(mainURI)
 authors = pd.read_csv(AUTHORS_SOURCE)
 for _, row in authors.iterrows():
     node = clean_uri(row["author"])
-    g.add((ns[node], RDF.type, ns.author))
     g.add((ns[node], ns.name, Literal(row["author"])))
 
 # Load :paper
@@ -49,7 +48,6 @@ papers = pd.read_csv(PAPERS_SOURCE)
 for _, row in papers.iterrows():
     node = clean_uri(row["title"])
     node_type = clean_uri(row["type"])
-    g.add((ns[node], RDF.type, ns[node_type]))
     g.add((ns[node], ns.title, Literal(row["title"])))
 
 # Load :authorship
@@ -57,8 +55,6 @@ authorships = pd.read_csv(WRITES_SOURCE)
 for _, row in authorships.iterrows():
     paper_node = URIRef(mainURI+clean_uri(row["title"]))
     author_node = URIRef(mainURI+clean_uri(row["author"]))
-
-    # create the authorship triple
     g.add((author_node, ns.authorship, paper_node))
 
 # Load :conference
@@ -66,14 +62,12 @@ conferences = pd.read_csv(CONFERENCES_SOURCE)
 for _, row in conferences.iterrows():
     node = clean_uri(row["name"])
     node_type = clean_uri(row["type"])
-    g.add((ns[node], RDF.type, ns[node_type]))
     g.add((ns[node], ns.name, Literal(row["name"])))
 
 # Load :proceeding
 proceedings = pd.read_csv(PROCEEDING_SOURCE)
 for _, row in proceedings.iterrows():
     node = f"proceeding_{row['proceeding']}"
-    g.add((ns[node], RDF.type, ns.proceeding))
     g.add((ns[node], ns.name, Literal(row["proceeding"])))
     g.add((ns[node], ns.year, Literal(row["year"])))
 
@@ -82,22 +76,18 @@ editions = pd.read_csv(EDITION_SOURCE)
 for _, row in editions.iterrows():
     conference = URIRef(mainURI+clean_uri(row["conference"]))
     proceeding = URIRef(f'{mainURI}proceeding_{row["proceeding"]}')
-
-    # create the authorship triple
     g.add((conference, ns.has_edition, proceeding))
 
 # Load :journal
 journals = pd.read_csv(JOURNAL_SOURCE)
 for _, row in journals.iterrows():
     node = clean_uri(row["name"])
-    g.add((ns[node], RDF.type, ns.journal))
     g.add((ns[node], ns.name, Literal(row["name"])))
 
 # Load :volume
 volumes = pd.read_csv(VOLUME_SOURCE)
 for _, row in volumes.iterrows():
     node = f"volume_{row['volume']}"
-    g.add((ns[node], RDF.type, ns.volume))
     g.add((ns[node], ns.name, Literal(row["volume"])))
     g.add((ns[node], ns.year, Literal(row["year"])))
 
@@ -106,8 +96,6 @@ publishes = pd.read_csv(PUBLICATION_SOURCE)
 for _, row in publishes.iterrows():
     journal = URIRef(mainURI+clean_uri(row["journal"]))
     volume = URIRef(f'{mainURI}volume_{row["volume"]}')
-
-    # create the authorship triple
     g.add((journal, ns.publish, volume))
 
 # Load :submit_to_volume
@@ -130,11 +118,9 @@ reviews = pd.read_csv(REVIEWS_SOURCE)
 for index, row in reviews.iterrows():
     # :reviewer
     reviewer = clean_uri(row["reviewer"])
-    g.add((ns[reviewer], RDF.type, ns.reviewer))
     g.add((ns[reviewer], ns.name, Literal(row["reviewer"])))
     # :review
     review = f"review_{index}"
-    g.add((ns[review], RDF.type, ns.review))
     g.add((ns[review], ns.decision_result, Literal(row["decision"])))
     g.add((ns[review], ns.decision_text, Literal(row["content"])))
     # :writes_review
@@ -157,7 +143,6 @@ chairs = pd.read_csv(BELONGS_TO_CONFERENCE)
 for _, row in chairs.iterrows():
     # :chair
     node = clean_uri(row["chair"])
-    g.add((ns[node], RDF.type, ns.chair))
     g.add((ns[node], ns.name, Literal(row["chair"])))
     # :belongs_to_conference
     chair_node = URIRef(mainURI + node)
@@ -176,7 +161,6 @@ editors = pd.read_csv(BELONGS_TO_JOURNAL)
 for _, row in editors.iterrows():
     # :editor
     node = clean_uri(row["editor"])
-    g.add((ns[node], RDF.type, ns.editor))
     g.add((ns[node], ns.name, Literal(row["editor"])))
     # :belongs_to_journal
     editor_node = URIRef(mainURI + node)
@@ -194,7 +178,6 @@ for _, row in editor_designates.iterrows():
 areas = pd.read_csv(AREA_SOURCE)
 for _, row in areas.iterrows():
     node = clean_uri(row["area"])
-    g.add((ns[node], RDF.type, ns.area))
     g.add((ns[node], ns.name, Literal(row["area"])))
 
 # Load item related to area
@@ -215,4 +198,4 @@ for _, row in related_to.iterrows():
 # print(g.serialize(format="turtle"))
 
 # Save the graph
-g.serialize(format="turtle", destination="graph/abox.ttl")
+g.serialize(format="turtle", destination="graph/B2_abox.ttl")

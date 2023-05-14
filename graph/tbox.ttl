@@ -1,0 +1,320 @@
+@prefix : <http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/> .
+
+<http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4#submit_to_proceeding
+:submit_to_proceeding rdf:type owl:ObjectProperty ;
+                      rdfs:domain [ rdf:type owl:Restriction ;
+                                    owl:onProperty :submit_to_proceeding ;
+                                    owl:someValuesFrom :paper
+                                  ] ;
+                      rdfs:range [ rdf:type owl:Restriction ;
+                                   owl:onProperty :submit_to_proceeding ;
+                                   owl:someValuesFrom :proceeding
+                                 ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/authorship
+:authorship rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :authorship ;
+                          owl:someValuesFrom :author
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :authorship ;
+                         owl:someValuesFrom :paper
+                       ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/belongs_to_conference
+:belongs_to_conference rdf:type owl:ObjectProperty ;
+                       rdfs:domain [ rdf:type owl:Restriction ;
+                                     owl:onProperty :belongs_to_conference ;
+                                     owl:someValuesFrom :chair
+                                   ] ;
+                       rdfs:range [ rdf:type owl:Restriction ;
+                                    owl:onProperty :belongs_to_conference ;
+                                    owl:someValuesFrom :conference
+                                  ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/belongs_to_journal
+:belongs_to_journal rdf:type owl:ObjectProperty ;
+                    rdfs:domain [ rdf:type owl:Restriction ;
+                                  owl:onProperty :belongs_to_journal ;
+                                  owl:someValuesFrom :editor
+                                ] ;
+                    rdfs:range [ rdf:type owl:Restriction ;
+                                 owl:onProperty :belongs_to_journal ;
+                                 owl:someValuesFrom :journal
+                               ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/conference_area
+:conference_area rdf:type owl:ObjectProperty ;
+                 rdfs:domain [ rdf:type owl:Restriction ;
+                               owl:onProperty :conference_area ;
+                               owl:someValuesFrom :conference
+                             ] ;
+                 rdfs:range [ rdf:type owl:Restriction ;
+                              owl:onProperty :conference_area ;
+                              owl:someValuesFrom :area
+                            ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/designates_chair
+:designates_chair rdf:type owl:ObjectProperty ;
+                  rdfs:domain [ rdf:type owl:Restriction ;
+                                owl:onProperty :designates_chair ;
+                                owl:someValuesFrom :chair
+                              ] ;
+                  rdfs:range [ rdf:type owl:Restriction ;
+                               owl:onProperty :designates_chair ;
+                               owl:someValuesFrom :reviewer
+                             ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/designates_editor
+:designates_editor rdf:type owl:ObjectProperty ;
+                   rdfs:domain [ rdf:type owl:Restriction ;
+                                 owl:onProperty :designates_editor ;
+                                 owl:someValuesFrom :editor
+                               ] ;
+                   rdfs:range [ rdf:type owl:Restriction ;
+                                owl:onProperty :designates_editor ;
+                                owl:someValuesFrom :reviewer
+                              ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/has_edition
+:has_edition rdf:type owl:ObjectProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty :has_edition ;
+                           owl:someValuesFrom :conference
+                         ] ;
+             rdfs:range [ rdf:type owl:Restriction ;
+                          owl:onProperty :has_edition ;
+                          owl:someValuesFrom :proceeding
+                        ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/journal_area
+:journal_area rdf:type owl:ObjectProperty ;
+              rdfs:domain [ rdf:type owl:Restriction ;
+                            owl:onProperty :journal_area ;
+                            owl:someValuesFrom :journal
+                          ] ;
+              rdfs:range [ rdf:type owl:Restriction ;
+                           owl:onProperty :journal_area ;
+                           owl:someValuesFrom :area
+                         ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/paper_area
+:paper_area rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :paper_area ;
+                          owl:someValuesFrom :paper
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :paper_area ;
+                         owl:someValuesFrom :area
+                       ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/publish
+:publish rdf:type owl:ObjectProperty ;
+         rdfs:domain [ rdf:type owl:Restriction ;
+                       owl:onProperty :publish ;
+                       owl:someValuesFrom :journal
+                     ] ;
+         rdfs:range [ rdf:type owl:Restriction ;
+                      owl:onProperty :publish ;
+                      owl:someValuesFrom :volume
+                    ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/review_of_paper
+:review_of_paper rdf:type owl:ObjectProperty ;
+                 rdfs:domain [ rdf:type owl:Restriction ;
+                               owl:onProperty :review_of_paper ;
+                               owl:someValuesFrom :paper
+                             ] ;
+                 rdfs:range [ rdf:type owl:Restriction ;
+                              owl:onProperty :review_of_paper ;
+                              owl:someValuesFrom :review
+                            ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/submit_to_volume
+:submit_to_volume rdf:type owl:ObjectProperty ;
+                  rdfs:domain [ rdf:type owl:Restriction ;
+                                owl:onProperty :submit_to_volume ;
+                                owl:someValuesFrom :paper
+                              ] ;
+                  rdfs:range [ rdf:type owl:Restriction ;
+                               owl:onProperty :submit_to_volume ;
+                               owl:someValuesFrom :volume
+                             ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/write_review
+:write_review rdf:type owl:ObjectProperty ;
+              rdfs:domain [ rdf:type owl:Restriction ;
+                            owl:onProperty :write_review ;
+                            owl:someValuesFrom :reviewer
+                          ] ;
+              rdfs:range [ rdf:type owl:Restriction ;
+                           owl:onProperty :write_review ;
+                           owl:someValuesFrom :review
+                         ] .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4#accepted
+:accepted rdf:type owl:DatatypeProperty ;
+          rdfs:domain :paper ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/decision_result
+:decision_result rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :review ;
+                 rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/decision_text
+:decision_text rdf:type owl:DatatypeProperty ;
+               rdfs:domain :review ;
+               rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/area
+:area rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/author
+:author rdf:type owl:Class ;
+        rdfs:subClassOf :person .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/chair
+:chair rdf:type owl:Class ;
+       rdfs:subClassOf :person .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/conference
+:conference rdf:type owl:Class ;
+            rdfs:subClassOf :venue .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/demo_paper
+:demo_paper rdf:type owl:Class ;
+            rdfs:subClassOf :paper .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/editor
+:editor rdf:type owl:Class ;
+        rdfs:subClassOf :person .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/expert_group
+:expert_group rdf:type owl:Class ;
+              rdfs:subClassOf :conference .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/full_paper
+:full_paper rdf:type owl:Class ;
+            rdfs:subClassOf :paper .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/journal
+:journal rdf:type owl:Class ;
+         rdfs:subClassOf :venue .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/paper
+:paper rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/person
+:person rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/poster
+:poster rdf:type owl:Class ;
+        rdfs:subClassOf :paper .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/proceeding
+:proceeding rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/regular_conference
+:regular_conference rdf:type owl:Class ;
+                    rdfs:subClassOf :conference .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/review
+:review rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/reviewer
+:reviewer rdf:type owl:Class ;
+          rdfs:subClassOf :person .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/short_paper
+:short_paper rdf:type owl:Class ;
+             rdfs:subClassOf :paper .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/symposium
+:symposium rdf:type owl:Class ;
+           rdfs:subClassOf :conference .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/venue
+:venue rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/volume
+:volume rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/workshop
+:workshop rdf:type owl:Class ;
+          rdfs:subClassOf :conference .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :expert_group
+                :regular_conference
+                :symposium
+                :workshop
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi
