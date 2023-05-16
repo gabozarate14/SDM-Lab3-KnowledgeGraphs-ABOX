@@ -12,27 +12,15 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4#submit_to_proceeding
-:submit_to_proceeding rdf:type owl:ObjectProperty ;
-                      rdfs:domain [ rdf:type owl:Restriction ;
-                                    owl:onProperty :submit_to_proceeding ;
-                                    owl:someValuesFrom :paper
-                                  ] ;
-                      rdfs:range [ rdf:type owl:Restriction ;
-                                   owl:onProperty :submit_to_proceeding ;
-                                   owl:someValuesFrom :proceeding
-                                 ] .
-
-
 ###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/authorship
 :authorship rdf:type owl:ObjectProperty ;
             rdfs:domain [ rdf:type owl:Restriction ;
                           owl:onProperty :authorship ;
-                          owl:someValuesFrom :author
+                          owl:allValuesFrom :author
                         ] ;
             rdfs:range [ rdf:type owl:Restriction ;
                          owl:onProperty :authorship ;
-                         owl:someValuesFrom :paper
+                         owl:allValuesFrom :paper
                        ] .
 
 
@@ -40,11 +28,11 @@
 :belongs_to_conference rdf:type owl:ObjectProperty ;
                        rdfs:domain [ rdf:type owl:Restriction ;
                                      owl:onProperty :belongs_to_conference ;
-                                     owl:someValuesFrom :chair
+                                     owl:allValuesFrom :chair
                                    ] ;
                        rdfs:range [ rdf:type owl:Restriction ;
                                     owl:onProperty :belongs_to_conference ;
-                                    owl:someValuesFrom :conference
+                                    owl:allValuesFrom :conference
                                   ] .
 
 
@@ -52,11 +40,11 @@
 :belongs_to_journal rdf:type owl:ObjectProperty ;
                     rdfs:domain [ rdf:type owl:Restriction ;
                                   owl:onProperty :belongs_to_journal ;
-                                  owl:someValuesFrom :editor
+                                  owl:allValuesFrom :editor
                                 ] ;
                     rdfs:range [ rdf:type owl:Restriction ;
                                  owl:onProperty :belongs_to_journal ;
-                                 owl:someValuesFrom :journal
+                                 owl:allValuesFrom :journal
                                ] .
 
 
@@ -64,11 +52,11 @@
 :conference_area rdf:type owl:ObjectProperty ;
                  rdfs:domain [ rdf:type owl:Restriction ;
                                owl:onProperty :conference_area ;
-                               owl:someValuesFrom :conference
+                               owl:allValuesFrom :conference
                              ] ;
                  rdfs:range [ rdf:type owl:Restriction ;
                               owl:onProperty :conference_area ;
-                              owl:someValuesFrom :area
+                              owl:allValuesFrom :area
                             ] .
 
 
@@ -76,11 +64,11 @@
 :designates_chair rdf:type owl:ObjectProperty ;
                   rdfs:domain [ rdf:type owl:Restriction ;
                                 owl:onProperty :designates_chair ;
-                                owl:someValuesFrom :chair
+                                owl:allValuesFrom :chair
                               ] ;
                   rdfs:range [ rdf:type owl:Restriction ;
                                owl:onProperty :designates_chair ;
-                               owl:someValuesFrom :reviewer
+                               owl:allValuesFrom :reviewer
                              ] .
 
 
@@ -88,11 +76,11 @@
 :designates_editor rdf:type owl:ObjectProperty ;
                    rdfs:domain [ rdf:type owl:Restriction ;
                                  owl:onProperty :designates_editor ;
-                                 owl:someValuesFrom :editor
+                                 owl:allValuesFrom :editor
                                ] ;
                    rdfs:range [ rdf:type owl:Restriction ;
                                 owl:onProperty :designates_editor ;
-                                owl:someValuesFrom :reviewer
+                                owl:allValuesFrom :reviewer
                               ] .
 
 
@@ -100,11 +88,11 @@
 :has_edition rdf:type owl:ObjectProperty ;
              rdfs:domain [ rdf:type owl:Restriction ;
                            owl:onProperty :has_edition ;
-                           owl:someValuesFrom :conference
+                           owl:allValuesFrom :conference
                          ] ;
              rdfs:range [ rdf:type owl:Restriction ;
                           owl:onProperty :has_edition ;
-                          owl:someValuesFrom :proceeding
+                          owl:allValuesFrom :proceeding
                         ] .
 
 
@@ -112,11 +100,11 @@
 :journal_area rdf:type owl:ObjectProperty ;
               rdfs:domain [ rdf:type owl:Restriction ;
                             owl:onProperty :journal_area ;
-                            owl:someValuesFrom :journal
+                            owl:allValuesFrom :journal
                           ] ;
               rdfs:range [ rdf:type owl:Restriction ;
                            owl:onProperty :journal_area ;
-                           owl:someValuesFrom :area
+                           owl:allValuesFrom :area
                          ] .
 
 
@@ -124,11 +112,11 @@
 :paper_area rdf:type owl:ObjectProperty ;
             rdfs:domain [ rdf:type owl:Restriction ;
                           owl:onProperty :paper_area ;
-                          owl:someValuesFrom :paper
+                          owl:allValuesFrom :paper
                         ] ;
             rdfs:range [ rdf:type owl:Restriction ;
                          owl:onProperty :paper_area ;
-                         owl:someValuesFrom :area
+                         owl:allValuesFrom :area
                        ] .
 
 
@@ -136,11 +124,11 @@
 :publish rdf:type owl:ObjectProperty ;
          rdfs:domain [ rdf:type owl:Restriction ;
                        owl:onProperty :publish ;
-                       owl:someValuesFrom :journal
+                       owl:allValuesFrom :journal
                      ] ;
          rdfs:range [ rdf:type owl:Restriction ;
                       owl:onProperty :publish ;
-                      owl:someValuesFrom :volume
+                      owl:allValuesFrom :volume
                     ] .
 
 
@@ -148,23 +136,41 @@
 :review_of_paper rdf:type owl:ObjectProperty ;
                  rdfs:domain [ rdf:type owl:Restriction ;
                                owl:onProperty :review_of_paper ;
-                               owl:someValuesFrom :paper
+                               owl:allValuesFrom :paper
                              ] ;
                  rdfs:range [ rdf:type owl:Restriction ;
                               owl:onProperty :review_of_paper ;
-                              owl:someValuesFrom :review
+                              owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                              owl:onClass :review
                             ] .
+
+
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/submit_to_proceeding
+:submit_to_proceeding rdf:type owl:ObjectProperty ;
+                      rdfs:domain [ rdf:type owl:Restriction ;
+                                    owl:onProperty :submit_to_proceeding ;
+                                    owl:allValuesFrom :paper
+                                  ] ;
+                      rdfs:range [ rdf:type owl:Restriction ;
+                                   owl:onProperty :submit_to_proceeding ;
+                                   owl:allValuesFrom :proceeding
+                                 ] .
 
 
 ###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/submit_to_volume
 :submit_to_volume rdf:type owl:ObjectProperty ;
                   rdfs:domain [ rdf:type owl:Restriction ;
                                 owl:onProperty :submit_to_volume ;
-                                owl:someValuesFrom :paper
+                                owl:allValuesFrom [ rdf:type owl:Class ;
+                                                    owl:unionOf ( :demo_paper
+                                                                  :full_paper
+                                                                  :short_paper
+                                                                )
+                                                  ]
                               ] ;
                   rdfs:range [ rdf:type owl:Restriction ;
                                owl:onProperty :submit_to_volume ;
-                               owl:someValuesFrom :volume
+                               owl:allValuesFrom :volume
                              ] .
 
 
@@ -172,11 +178,11 @@
 :write_review rdf:type owl:ObjectProperty ;
               rdfs:domain [ rdf:type owl:Restriction ;
                             owl:onProperty :write_review ;
-                            owl:someValuesFrom :reviewer
+                            owl:allValuesFrom :reviewer
                           ] ;
               rdfs:range [ rdf:type owl:Restriction ;
                            owl:onProperty :write_review ;
-                           owl:someValuesFrom :review
+                           owl:allValuesFrom :review
                          ] .
 
 
@@ -184,7 +190,7 @@
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4#accepted
+###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/accepted
 :accepted rdf:type owl:DatatypeProperty ;
           rdfs:domain :paper ;
           rdfs:range xsd:string .
@@ -222,7 +228,8 @@
 
 ###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/conference
 :conference rdf:type owl:Class ;
-            rdfs:subClassOf :venue .
+            rdfs:subClassOf :venue ;
+            owl:disjointWith :journal .
 
 
 ###  http://www.semanticweb.org/eloic/ontologies/2023/4/untitled-ontology-4/demo_paper
@@ -307,6 +314,27 @@
 #################################################################
 #    General axioms
 #################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :area
+                :paper
+                :person
+                :proceeding
+                :review
+                :venue
+                :volume
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :demo_paper
+                :full_paper
+                :poster
+                :short_paper
+              )
+] .
+
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :expert_group

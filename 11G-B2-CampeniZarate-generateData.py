@@ -107,6 +107,9 @@ related_to_df = related_to_df.assign(type='paper')
 for _,row in conferences.iterrows():
     for _ in range(random.randint(1,5)):
         area = random.choice(area_list)
+        # For query 4 to have answers
+        if random.choice([True, False]):
+            area = 'Databases'
         row_data = {'type': 'conference', 'name': row['name'], 'area': area}
         related_to_df = pd.concat([related_to_df, pd.DataFrame([row_data])], ignore_index=True)
 
@@ -127,7 +130,7 @@ final_decision_df = pd.DataFrame({'article': final_decision.index, 'final_decisi
 final_decision_df.to_csv(OUTPUT_PAPER_ACCEPTED,encoding='utf-8',index=False)
 
 # Generate paper subtypes
-paper_subtypes = ['full paper', 'short paper', 'demo_paper']
+paper_subtypes = ['full paper', 'short paper', 'demo paper']
 
 # poster will be handled only for conferences
 papers_conf = presented['article'].unique()
