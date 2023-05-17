@@ -41,14 +41,14 @@ ns = Namespace(mainURI)
 authors = pd.read_csv(AUTHORS_SOURCE)
 for _, row in authors.iterrows():
     node = clean_uri(row["author"])
-    g.add((ns[node], ns.name, Literal(row["author"])))
+    g.add((ns[node], ns.name_person, Literal(row["author"])))
 
 # Load :paper
 papers = pd.read_csv(PAPERS_SOURCE)
 for _, row in papers.iterrows():
     node = clean_uri(row["title"])
     node_type = clean_uri(row["type"])
-    g.add((ns[node], ns.title, Literal(row["title"])))
+    g.add((ns[node], ns.title_paper, Literal(row["title"])))
 
 # Load :authorship
 authorships = pd.read_csv(WRITES_SOURCE)
@@ -62,14 +62,14 @@ conferences = pd.read_csv(CONFERENCES_SOURCE)
 for _, row in conferences.iterrows():
     node = clean_uri(row["name"])
     node_type = clean_uri(row["type"])
-    g.add((ns[node], ns.name, Literal(row["name"])))
+    g.add((ns[node], ns.name_venue, Literal(row["name"])))
 
 # Load :proceeding
 proceedings = pd.read_csv(PROCEEDING_SOURCE)
 for _, row in proceedings.iterrows():
     node = f"proceeding_{row['proceeding']}"
-    g.add((ns[node], ns.name, Literal(row["proceeding"])))
-    g.add((ns[node], ns.year, Literal(row["year"])))
+    g.add((ns[node], ns.name_proceeding, Literal(row["proceeding"])))
+    g.add((ns[node], ns.year_proceeding, Literal(row["year"])))
 
 # Load :has_edition
 editions = pd.read_csv(EDITION_SOURCE)
@@ -82,14 +82,14 @@ for _, row in editions.iterrows():
 journals = pd.read_csv(JOURNAL_SOURCE)
 for _, row in journals.iterrows():
     node = clean_uri(row["name"])
-    g.add((ns[node], ns.name, Literal(row["name"])))
+    g.add((ns[node], ns.name_venue, Literal(row["name"])))
 
 # Load :volume
 volumes = pd.read_csv(VOLUME_SOURCE)
 for _, row in volumes.iterrows():
     node = f"volume_{row['volume']}"
-    g.add((ns[node], ns.name, Literal(row["volume"])))
-    g.add((ns[node], ns.year, Literal(row["year"])))
+    g.add((ns[node], ns.name_volume, Literal(row["volume"])))
+    g.add((ns[node], ns.year_volume, Literal(row["year"])))
 
 # Load :publish
 publishes = pd.read_csv(PUBLICATION_SOURCE)
@@ -118,7 +118,7 @@ reviews = pd.read_csv(REVIEWS_SOURCE)
 for index, row in reviews.iterrows():
     # :reviewer
     reviewer = clean_uri(row["reviewer"])
-    g.add((ns[reviewer], ns.name, Literal(row["reviewer"])))
+    g.add((ns[reviewer], ns.name_person, Literal(row["reviewer"])))
     # :review
     review = f"review_{index}"
     g.add((ns[review], ns.decision_result, Literal(row["decision"])))
@@ -143,7 +143,7 @@ chairs = pd.read_csv(BELONGS_TO_CONFERENCE)
 for _, row in chairs.iterrows():
     # :chair
     node = clean_uri(row["chair"])
-    g.add((ns[node], ns.name, Literal(row["chair"])))
+    g.add((ns[node], ns.name_person, Literal(row["chair"])))
     # :belongs_to_conference
     chair_node = URIRef(mainURI + node)
     conference_node = URIRef(mainURI + clean_uri(row["conference"]))
@@ -161,7 +161,7 @@ editors = pd.read_csv(BELONGS_TO_JOURNAL)
 for _, row in editors.iterrows():
     # :editor
     node = clean_uri(row["editor"])
-    g.add((ns[node], ns.name, Literal(row["editor"])))
+    g.add((ns[node], ns.name_person, Literal(row["editor"])))
     # :belongs_to_journal
     editor_node = URIRef(mainURI + node)
     journal_node = URIRef(mainURI + clean_uri(row["journal"]))
