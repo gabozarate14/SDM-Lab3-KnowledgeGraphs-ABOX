@@ -189,20 +189,20 @@ areas = pd.read_csv(AREA_SOURCE)
 for _, row in areas.iterrows():
     node = clean_uri(row["area"])
     g.add((ns[node], RDF.type, ns.area))
-    g.add((ns[node], ns.name, Literal(row["area"])))
+    g.add((ns[node], ns.topic, Literal(row["area"])))
 
 # Load item related to area
 related_to = pd.read_csv(RELATED_TO_SOURCE)
 for _, row in related_to.iterrows():
-    # Si se cambia a un related por tipo agregar if
     main_node = URIRef(mainURI + clean_uri(row["name"]))
     area_node = URIRef(mainURI + clean_uri(row["area"]))
-    if row["type"] == 'paper':
-        g.add((main_node, ns.paper_area, area_node))
-    elif row["type"] == 'conference':
-        g.add((main_node, ns.conference_area, area_node))
-    elif row["type"] == 'journal':
-        g.add((main_node, ns.journal_area, area_node))
+    g.add((main_node, ns.related_area, area_node))
+    # if row["type"] == 'paper':
+    #     g.add((main_node, ns.paper_area, area_node))
+    # elif row["type"] == 'conference':
+    #     g.add((main_node, ns.conference_area, area_node))
+    # elif row["type"] == 'journal':
+    #     g.add((main_node, ns.journal_area, area_node))
 
 
 # # Print the graph
